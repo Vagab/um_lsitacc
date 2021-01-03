@@ -1,0 +1,7 @@
+<%= simple_form_for :chat, url: chats_path, method: :post do |f| %>
+  Find user by:
+  <%= f.input :user_ids, required: false, label: 'User names', collection: User.all.where.not(id: current_user.id).order(id: :asc), label_method: :name %>
+  or
+  <%= f.input :user_idds, required: false, label: 'User ids', collection: User.all.where.not(id: current_user.id).order(id: :asc), label_method: :id %>
+  <%= f.submit 'Create chat' %>
+<% end %>

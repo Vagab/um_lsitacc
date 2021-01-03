@@ -1,0 +1,13 @@
+<h1> Chat between <%= @users.map {|user| user.name + ' (' + user.type + ')' }.join(", ") %> </h1>
+<h2 style='background-color: red;'> <%= @errors if @errors %> </h2>
+<ul>
+  <% @messages.each do |message| %>
+    <li><%= message.content %> | from <%= message.user.first_name %></li>
+  <% end %>
+</ul>
+<%= simple_form_for :message, url: messages_path(chat_id: @chat.id), method: :post do |f| %>
+  <%= f.input :content %>
+  <%= f.submit 'Send message' %>
+<% end %>
+
+<%= link_to 'Retreive public keys for the users in the chat', chat_retreive_keys_path(@chat) %>
